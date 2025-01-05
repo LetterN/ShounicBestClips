@@ -1,2 +1,4 @@
 *.db
 *.db-*
+data/
+logs/
