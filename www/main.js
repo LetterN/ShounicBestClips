@@ -38,6 +38,7 @@ let selectedVote = -1; // 0 1 2
  * @type HTMLDivElement
  */
 let errorBox;
+let videoBox, videoBoxOver;
 
 let ___INTERNAL_ytLoadedDebounce = false
 window.onYoutubeIframeAPIReady = () => {
@@ -70,6 +71,15 @@ const onPageLoad = () => {
 	player2Box = document.getElementById('player2Box');
 
 	errorBox = document.getElementById('errorElement');
+	videoBox = document.getElementById('videos');
+	videoBoxOver = document.getElementById('videos-over');
+
+	const clock = document.getElementById('countdownTracker');
+	if (voteIsOver()) {
+		clock.textContent = "Voting is closed!"
+		displayIsOver()
+		return
+	}
 
 	selectVote(0);
 
@@ -88,16 +98,18 @@ const onPageLoad = () => {
 		}
 	}, 100);
 
-	const clock = document.getElementById('countdownTracker');
-	if (voteIsOver()) {
-		clock.textContent = "Voting is closed!"
-		return
-	}
 	setInterval(() => {
 		clock.textContent = `${timeFormatter(expiryDate - new Date())} until voting closes!`
 	}, 1000);
 }
 
+const displayIsOver = (textIfAny = "voting is over!") => {
+	videoBox.classList.add('hidden')
+	errorBox.classList.add('hidden')
+	videoBoxOver.classList.remove('hidden')
+	videoBoxOver.textContent = textIfAny;
+	document.getElementsByClassName('mysides')[0].classList.add('hidden') // hacky this sux
+}
 
 const selectVote = (what) => {
 	if (what === selectedVote || voteIsOver()) return;
@@ -115,6 +127,7 @@ const getQueue = () => {
 				const readableError = await r.json()
 				if (r?.status == 420) {
 					// we are done, leave
+					displayIsOver()
 					setError("Voting is closed!", r)
 					return
 				}
@@ -136,6 +149,7 @@ const postVote = () => {
 				const readableError = await r.json()
 				if (r?.status == 420) {
 					// we are done, leave
+					displayIsOver()
 					setError("Voting is closed!", r)
 					return
 				}

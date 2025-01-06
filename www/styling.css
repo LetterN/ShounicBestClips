@@ -396,6 +396,17 @@ form {
     border-bottom-width: 1em !important;
 }
 
+/* when voting is done/queue is empty */
+.videos-over {
+    font-size: 4em;
+    display: flex;
+    font-weight: bolder;
+    margin: 1em;
+    height: 5em;
+    justify-content: center;
+    align-items: center;
+}
+
 /* todo commit this to oldbttn */
 
 .standardButton-2 {
@@ -434,6 +445,7 @@ form {
     overflow: auto;
 }
 
+/* Floating Thing */
 .bigFloatingText {
     /* hl3 confirmed????!!?!?!?!?!?! */
     z-index: 3;
