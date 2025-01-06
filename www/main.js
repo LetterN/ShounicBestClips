@@ -55,7 +55,7 @@ window.onYoutubeIframeAPIReady = () => {
 
 const timeFormatter = (time) => {
 	time /= 1000
-	return `${Math.round((time/(60*60*24)) % 24)}:${Math.round((time/(60*60)) % 60)}:${Math.round((time/60) % 60)}:${Math.round((time) % 60)}`
+	return `${Math.round(time/(60*60*24))}:${String(Math.round((time/(60*60)) % 24)).padStart(2, "0")}:${String(Math.round((time/60) % 60)).padStart(2, "0")}:${String(Math.round((time) % 60)).padStart(2, "0")}`
 }
 
 const voteIsOver = () => expiryDate < new Date();
