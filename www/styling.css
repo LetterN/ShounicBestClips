@@ -354,7 +354,7 @@ form {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 /* layout flexbox */
@@ -432,6 +432,25 @@ form {
     max-height: 10em;
     transition: all 100ms;
     overflow: auto;
+}
+
+.bigFloatingText {
+    /* hl3 confirmed????!!?!?!?!?!?! */
+    z-index: 3;
+    background-color: #000000ad;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+}
+.bigFloatingTextContainer {
+    font-size: 2em;
+    font-weight: bold;
+    background-color: var(--color-dark-bg);
+    border-radius: 0.2em;
+    padding: 0.5em;
 }
 
 @media only screen and (max-width: 374px) {
