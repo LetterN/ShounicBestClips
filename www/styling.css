@@ -1,12 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
 :root {
     /* shounic color :3 */
     --color-bg: #304654;
     --color-light-bg: rgb(54, 79, 94);
     --color-dark-bg: #222d34;
-    
-
 
     --color-menu-button-hover: #395a6e;
     --color-button-outline: #222d34;
@@ -29,6 +25,9 @@
     /* overflow-y: scroll; */
 
     --min-double-wide-width: 500px;
+
+
+    --font: Arial, Verdana, sans-serif;
 }
 
 /* for debug :3
@@ -48,32 +47,27 @@ a:active { color: var(--selected-color); }
 body {
     background-color: var(--color-bg); 
     margin: 0;
-    width: 100%;
-    height: 100%;
-    flex: 1;
+    padding: 0;
     border: none;
-    display: grid;
-    grid-template-rows: 75px 1fr;
 }
 
 html {
-    margin: 0;
-    border: none;
-    height: 100%;
-    flex: 1;
+    font-family: var(--font);
+    color: var(--color-text);
 }
 
 p {
     padding: 0;
     margin: 0;
     color: var(--color-text);
-    font-family: 'Afacad Flux';
+    font-family: var(--font);
 }
 
 
 .headerText {
     color: var(--color-text-faded);
-    font-size: 20px;
+    font-size: 2em;
+    padding: 0.5em 0em !important;
 }
 
 .pageTitleText {
@@ -94,8 +88,8 @@ p {
 
 
 button {
-    font-family: 'Afacad Flux';
-    font-size: 22px;
+    font-family: var(--font);
+    font-size: 1.3em;
     color: var(--color-text);
     border: none;
 
@@ -103,7 +97,7 @@ button {
 }
 
 iframe {
-    border: none;
+    /* border: none; */
     transition: 0.15s;
 }
 
@@ -117,6 +111,7 @@ form {
     grid-template-columns: 1fr minmax(0, 700px) 135px 135px 1fr;
     background-color: var(--color-dark-bg);
     overflow: hidden;
+    padding: 2px;
 }
 
 @media (max-width: 800px) {
@@ -194,12 +189,7 @@ form {
 
 
 .contentHeader {
-    grid-area: head;
     text-align: center;
-    vertical-align: middle;
-    line-height: 55px;
-    display: table-cell;
-    transition: opacity 1s;
 }
 
 .invis {
@@ -285,7 +275,7 @@ form {
     margin: 0;
     margin-top: 8px;
     color: var(--color-text);
-    font-family: 'Afacad Flux';
+    font-family: var(--font);
 }
 
 
@@ -365,4 +355,119 @@ form {
 
 .hidden {
     display: none;
+}
+
+/* layout flexbox */
+.contentWrapper-v2 {
+    display: flex;
+    flex-direction: column;
+    /* padding: 1em; */
+}
+
+/* Video Flexboxes */
+.videos {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.videos > * {
+    flex: 1;
+    margin: 2em;
+    display: flex;
+    flex-direction: column;
+}
+
+.videos > * > * {
+    margin-bottom: 1em;
+}
+
+.videos > * > iframe {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16 / 9;
+    transition: all 80ms;
+    border: 0px solid white;
+    box-sizing: border-box;
+}
+
+.videos > *.selected > iframe {
+    border-bottom-width: 1em !important;
+}
+
+/* todo commit this to oldbttn */
+
+.standardButton-2 {
+    height: 2.5em;
+    width: 100%;
+    border-radius: 12px;
+    background-color: var(--color-dark-bg);
+    /* margin: 0 calc(50% - 170px/2); */
+    border: 0px solid var(--color-dark-bg);
+}
+
+.standardButton-2:disabled {
+    border: 2px solid var(--color-dark-bg);
+    color: var(--color-dark-text);
+    background-color: transparent;
+}
+
+.standardButton-2:hover:not([disabled]) {
+    border: 2px solid var(--color-text);
+}
+
+.mysides {
+    width: 80%;
+    align-self: center;
+}
+
+/* ErrorBox */
+.error {
+    /* padding: 0.2em; */
+    margin: 0.5em;
+    text-align: center;
+    border-radius: 0.5em;
+    border: solid 2px red;
+    max-height: 10em;
+    transition: all 100ms;
+    overflow: auto;
+}
+
+@media only screen and (max-width: 374px) {
+    .videos {
+        flex-direction: column;
+    }
+    .videos > * {
+        margin: 0.5em;
+    }
+    .videos > * > * {
+        margin-bottom: 0.4em;
+    }
+    .contentWrapper-v2 { 
+        padding: 0.1em;
+    }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 768px) {
+    .videos {
+        flex-direction: column;
+    }
+    .videos > * {
+        margin: 1em;
+    }
+    .videos > * > * {
+        margin-bottom: 0.6em;
+    }
+    .contentWrapper-v2 { 
+        padding: 0.5em;
+    }
+}
+@media (min-width: 950px) {
+    .videos > * {
+        margin: 1em;
+    }
+    .videos > * > * {
+        margin-bottom: 0.8em;
+    }
 }
