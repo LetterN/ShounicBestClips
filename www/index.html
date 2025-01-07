@@ -30,8 +30,10 @@
     </div> -->
     <div class="contentWrapper-v2">
         <p class="contentHeader headerText" id="countdownTracker">It's Over</p>
-        <div id="videos-over" class="videos-over hidden"></div>
-        <div id="videos" class="videos">
+        <div id="videos-over" class="videos-over">
+            Loading videos...
+        </div>
+        <div id="videos" class="videos hidden">
             <div id="player1Box" class="selected">
                 <b id="player1"></b>
                 <button class="standardButton-2" onclick="selectVote(1)">Select A</button>
@@ -41,10 +43,9 @@
                 <button class="standardButton-2" onclick="selectVote(2)">Select B</button>
             </div>
         </div>
-        <button class="standardButton-2 mysides" onclick="postVote()">Submit</button>
+        <button class="standardButton-2 mysides hidden" onclick="postVote()">Submit</button>
         <div class="error hidden" id="errorElement">
             <h2>Something went wrong!</h2>
-            <p>...and i dont know what</p>    
         </div>
         <div class="guideBox" id="guideBox">
             <p>Epic Guide:</p>

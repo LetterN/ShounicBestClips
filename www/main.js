@@ -95,6 +95,9 @@ const onPageLoad = () => {
 		if(player1Ready && player2Ready){
 			clearInterval(checkPlayers);
 			getQueue()
+			videoBoxOver.classList.add('hidden')
+			videoBox.classList.remove('hidden')
+			document.getElementsByClassName('mysides')[0].classList.remove('hidden')
 		}
 	}, 100);
 
