@@ -95,9 +95,6 @@ const onPageLoad = () => {
 		if(player1Ready && player2Ready){
 			clearInterval(checkPlayers);
 			getQueue()
-			videoBoxOver.classList.add('hidden')
-			videoBox.classList.remove('hidden')
-			document.getElementsByClassName('mysides')[0].classList.remove('hidden')
 		}
 	}, 100);
 
@@ -112,6 +109,13 @@ const displayIsOver = (textIfAny = "voting is over!") => {
 	videoBoxOver.classList.remove('hidden')
 	videoBoxOver.textContent = textIfAny;
 	document.getElementsByClassName('mysides')[0].classList.add('hidden') // hacky this sux
+}
+
+const hideIsOver = () => {
+	if (videoBoxOver.classList.contains('hidden')) return;
+	videoBoxOver.classList.add('hidden')
+	videoBox.classList.remove('hidden')
+	document.getElementsByClassName('mysides')[0].classList.remove('hidden')
 }
 
 const selectVote = (what) => {
@@ -131,6 +135,7 @@ const getQueue = () => {
 			}
 			const data = await r.json();
 			setVideos(data["a"], data["b"])
+			hideIsOver();
 		})
 		.catch(async (r) => {
 			try {
