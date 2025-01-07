@@ -10,7 +10,7 @@ const fetchWrapper = (input, init) => {
 			if (!r.ok) {
 				return err(r)
 			}
-			res(r.json())
+			res(r)
 		}).catch(c => err(c))
 	});
 }
@@ -121,16 +121,23 @@ const selectVote = (what) => {
 const getQueue = () => {
 	if (voteIsOver()) return
 	return fetchWrapper("/vote/next", { headers: { 'Accept': 'application/json' } })
-		.then(r => {setVideos(r["a"], r["b"])})
+		.then(async (r) => {
+			if (r.status == 204) {
+				displayIsOver("queue is completed!")
+				return
+			}
+			const data = await r.json();
+			setVideos(data["a"], data["b"])
+		})
 		.catch(async (r) => {
 			try {
-				const readableError = await r.json()
 				if (r?.status == 420) {
 					// we are done, leave
 					displayIsOver()
 					setError("Voting is closed!", r)
 					return
 				}
+				const readableError = await r.json()
 				setError(readableError['message'], r)
 			} catch (error) {
 				setError(r.message, r)
@@ -146,13 +153,13 @@ const postVote = () => {
 		.then(ok => {getQueue()})
 		.catch(async (r) => {
 			try {
-				const readableError = await r.json()
 				if (r?.status == 420) {
 					// we are done, leave
 					displayIsOver()
 					setError("Voting is closed!", r)
 					return
 				}
+				const readableError = await r.json()
 				setError(readableError['message'], r)
 			} catch (error) {
 				setError(r.message, r)
