@@ -21,7 +21,7 @@ Routes
 * `/vote/submit?choice=` Submit a vote, returns the next vote.
 * `/vote/deadline` Get the voting deadline as a unix time string
 
-Both `/vote` routes will return the json for the next vote:
+`/vote/next` returns the following json for the next vote:
 ```
 {
     "a": string,
